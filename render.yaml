@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: levelup-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn levelup.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: levelup-app.onrender.com
+      - key: DATABASE_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+
