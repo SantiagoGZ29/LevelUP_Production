@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # build.sh
 
-# Instala los paquetes
+# Crea un entorno virtual y activa
+python -m venv venv
+source venv/bin/activate  # En Windows sería venv\Scripts\activate
+
+# Instala los paquetes necesarios
 pip install -r requirements.txt
 
 # Recolecta los archivos estáticos (CSS, JS, imágenes)
