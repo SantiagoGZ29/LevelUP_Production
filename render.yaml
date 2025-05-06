@@ -1,22 +1,23 @@
 services:
   - type: web
-    name: levelupapp  # Cambia esto al nombre de tu aplicación en Render
+    name: levelup-app
     env: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn levelup.wsgi:application"
     envVars:
       - key: SECRET_KEY
-        value: django-insecure-z3c4h#a2mc+kjtjdjx4k4sdhx2)s7ujqo*a_*lc_cw1$6iq0tw
+        sync: false
       - key: DEBUG
-        value: False  # Asegúrate de que DEBUG esté en False en producción
+        value: False
       - key: ALLOWED_HOSTS
-        value: levelup-app.onrender.com  # La URL de tu aplicación en Render
+        value: levelup-app.onrender.com
       - key: DATABASE_URL
-        value: postgresql://admin:3mzH8ZXMPOEfTM7Bl8PmKaoLQOJGpGpa@dpg-d0clnn2dbo4c73fjgso0-a.oregon-postgres.render.com/dblevelup
+        sync: false
       - key: CLOUDINARY_CLOUD_NAME
-        value: drynm4xwd
+        sync: false
       - key: CLOUDINARY_API_KEY
-        value: 726632658177361
+        sync: false
       - key: CLOUDINARY_API_SECRET
-        value: i4OgatTI-5FSXLdEDS-PSCgUxgA
+        sync: false
+
 
