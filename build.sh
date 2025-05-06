@@ -12,4 +12,4 @@ pip install -r requirements.txt
 python manage.py collectstatic --noinput
 
 # Aplica migraciones a la base de datos
-python manage.py migrate
+#python manage.py migrate
