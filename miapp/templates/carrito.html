@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Carrito de Compras 🛒</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    {% if carrito %}
+                        {% for juego_id, item in carrito.items %}
+                            <div class="d-flex align-items-center border-bottom pb-3">
+                                <img src="{{ item.imagen }}" class="img-fluid w-25 rounded" alt="{{ item.nombre }}">
+                                <div class="ms-3 flex-grow-1">
+                                    <h5 class="mb-1">{{ item.nombre }}</h5>
+                                    <p class="mb-1 text-muted">Precio: $ {{ item.precio|floatformat:0|intcomma }}</p>
+                                    <p class="mb-1 text-muted">Cantidad: {{ item.cantidad }}</p>
+                                </div>
+                                <form method="POST" action="{% url 'eliminar_del_carrito' juego_id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        {% endfor %}
+
+                        <!-- Total y botón de compra -->
+                        <div class="mt-4 d-flex justify-content-between">
+                            <h4>Total: <span id="total">${{ total|floatformat:0|intcomma }}</span></h4>
+                            <form method="POST" action="{% url 'finalizar_compra' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Finalizar compra</button>
+                            </form>                            
+                        </div>
+                    {% else %}
+                        <p class="text-center text-muted">Tu carrito está vacío 😔</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+{% if messages %}
+<div class="alert alert-danger">
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<div class="container mt-5">
+    <h3>Recuperar contraseña</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" name="correo" required>
+            <small class="text-danger" id="correo-error"></small>
+        </div>
+
+        <div class="mb-3">
+            <label for="nueva_contrasena" class="form-label">Nueva contraseña</label>
+            <input type="password" class="form-control" name="nueva_contrasena" required>
+            <small class="text-danger" id="nueva_contrasena-error"></small>
+        </div>
+
+        <div class="mb-3">
+            <label for="confirmar_contrasena" class="form-label">Confirmar contraseña</label>
+            <input type="password" class="form-control" name="confirmar_contrasena" required>
+            <small class="text-danger" id="confirmar_contrasena-error"></small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Restablecer contraseña</button>
+    </form>
+</div>
+
+<!-- Validaciones de seguridad -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const nueva = document.querySelector('input[name="nueva_contrasena"]');
+        const confirmar = document.querySelector('input[name="confirmar_contrasena"]');
+
+        form.addEventListener('submit', function (e) {
+            const regexContrasenna = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,18}$/;
+
+            if (!regexContrasenna.test(nueva.value)) {
+                alert('La contraseña debe tener entre 8 y 18 caracteres, incluir al menos una mayúscula, una minúscula, un número y un carácter especial.');
+                e.preventDefault();
+                return;
+            }
+            if (nueva.value !== confirmar.value) {
+                alert('Las contraseñas no coinciden.');
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
+
+{% endblock %}
+
