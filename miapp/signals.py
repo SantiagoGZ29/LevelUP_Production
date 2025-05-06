@@ -36,27 +36,25 @@ def insertar_datos_iniciales(sender, **kwargs):
 
     # Insertar juegos con las imágenes correctas
     juegos = [
-        {"nombre": "Call of Duty", "categoria": "Acción", "precio": 39990, "descripcion": "Un juego de disparos en primera persona, con modos multijugador y campaña.", "imagen": "call_of_duty.jpg"},
-        {"nombre": "GTA V", "categoria": "Acción", "precio": 29990, "descripcion": "Juego de mundo abierto con acción, crimen y aventura.", "imagen": "gta_v.jpg"},
-        {"nombre": "FIFA 25", "categoria": "Deporte", "precio": 39990, "descripcion": "Simulador de fútbol con licencias oficiales y modos de juego realistas.", "imagen": "fifa_25.jpg"},
-        {"nombre": "NBA 24", "categoria": "Deporte", "precio": 39990, "descripcion": "Simulador de baloncesto con equipos y jugadores actuales.", "imagen": "nba_24.jpg"},
-        {"nombre": "The Legend of Zelda", "categoria": "Aventura", "precio": 49990, "descripcion": "Juego de aventuras en un mundo fantástico con puzzles y acción.", "imagen": "the_legend_of_zelda.jpg"},
-        {"nombre": "Uncharted 5", "categoria": "Aventura", "precio": 49990, "descripcion": "Juego de acción y aventura con exploración y acción trepidante.", "imagen": "uncharted_5.jpg"},
-        {"nombre": "The Callisto Protocol", "categoria": "Terror", "precio": 39990, "descripcion": "Juego de terror y supervivencia en una estación espacial.", "imagen": "The_callisto_protocol.jpg"},
-        {"nombre": "Resident Evil 4", "categoria": "Terror", "precio": 29990, "descripcion": "Remake del clásico juego de terror con elementos de supervivencia.", "imagen": "resident_evil_4.jpg"},
-        {"nombre": "Age of Empires", "categoria": "Estrategia", "precio": 29990, "descripcion": "Juego de estrategia en tiempo real en el que los jugadores gestionan civilizaciones.", "imagen": "age_of_empires.jpg"},
-        {"nombre": "Total War", "categoria": "Estrategia", "precio": 39990, "descripcion": "Juego de estrategia en tiempo real con batallas masivas en tiempo real.", "imagen": "total_war.jpg"},
+        {"nombre": "Call of Duty", "categoria": "Acción", "precio": 39990, "descripcion": "Un juego de disparos en primera persona, con modos multijugador y campaña."},
+        {"nombre": "GTA V", "categoria": "Acción", "precio": 29990, "descripcion": "Juego de mundo abierto con acción, crimen y aventura."},
+        {"nombre": "FIFA 25", "categoria": "Deporte", "precio": 39990, "descripcion": "Simulador de fútbol con licencias oficiales y modos de juego realistas."},
+        {"nombre": "NBA 24", "categoria": "Deporte", "precio": 39990, "descripcion": "Simulador de baloncesto con equipos y jugadores actuales."},
+        {"nombre": "The Legend of Zelda", "categoria": "Aventura", "precio": 49990, "descripcion": "Juego de aventuras en un mundo fantástico con puzzles y acción."},
+        {"nombre": "Uncharted 5", "categoria": "Aventura", "precio": 49990, "descripcion": "Juego de acción y aventura con exploración y acción trepidante."},
+        {"nombre": "The Callisto Protocol", "categoria": "Terror", "precio": 39990, "descripcion": "Juego de terror y supervivencia en una estación espacial."},
+        {"nombre": "Resident Evil 4", "categoria": "Terror", "precio": 29990, "descripcion": "Remake del clásico juego de terror con elementos de supervivencia."},
+        {"nombre": "Age of Empires", "categoria": "Estrategia", "precio": 29990, "descripcion": "Juego de estrategia en tiempo real en el que los jugadores gestionan civilizaciones."},
+        {"nombre": "Total War", "categoria": "Estrategia", "precio": 39990, "descripcion": "Juego de estrategia en tiempo real con batallas masivas en tiempo real."},
     ]
 
     for juego_data in juegos:
-        categoria = Categoria.objects.get(categoria=juego_data["categoria"])  # Buscar la categoría por nombre
-        imagen_path = os.path.join('juegos', juego_data["imagen"])  # Crear la ruta correcta de la imagen
+        categoria = Categoria.objects.get(categoria=juego_data["categoria"])
         Juego.objects.get_or_create(
             nombre=juego_data["nombre"],
             categoria=categoria,
             precio=juego_data["precio"],
-            descripcion=juego_data["descripcion"],
-            imagen=imagen_path  # Guardar la ruta correcta de la imagen
+            descripcion=juego_data["descripcion"]
         )
 
     print("Datos iniciales cargados con éxito.")  # Para confirmar que los datos se han insertado correctamente
