@@ -50,11 +50,14 @@ def insertar_datos_iniciales(sender, **kwargs):
 
     for juego_data in juegos:
         categoria = Categoria.objects.get(categoria=juego_data["categoria"])
-        Juego.objects.get_or_create(
+
+        # Asegurarse de que no haya duplicados
+        juego, created = Juego.objects.get_or_create(
             nombre=juego_data["nombre"],
             categoria=categoria,
-            precio=juego_data["precio"],
-            descripcion=juego_data["descripcion"]
+            defaults={'precio': juego_data["precio"], 'descripcion': juego_data["descripcion"]}
         )
+        if not created:
+            print(f"El juego '{juego_data['nombre']}' ya existía.")
 
     print("Datos iniciales cargados con éxito.")  # Para confirmar que los datos se han insertado correctamente
