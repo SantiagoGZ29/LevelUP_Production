@@ -3,10 +3,20 @@ from django.dispatch import receiver
 from .models import RolUsuario, GeneroUsuario, NombreRegion, Categoria, Juego
 from django.conf import settings
 import os
+from django.db import connection
 
 @receiver(post_migrate)
 def insertar_datos_iniciales(sender, **kwargs):
+    # Ejecutar SOLO cuando migre miapp
+    if sender.label != "miapp":
+        return
     print("Cargando datos iniciales...")  # Para verificar si se ejecuta el signal
+
+    tablas = connection.introspection.table_names()
+
+    # Verificar que las tablas existan
+    if "miapp_rolusuario" not in tablas:
+        return
 
     roles = ['administrador', 'usuario']
     generos = ['masculino', 'femenino', 'otro']
