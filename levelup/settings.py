@@ -13,10 +13,9 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
-import oracledb
-import platform
-
-import dj_database_url
+# import oracledb
+# import platform
+# import dj_database_url
 
 '''
 if platform.system() == "Windows":
@@ -103,38 +102,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'levelup.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-
-#DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.oracle',
-        #'NAME': 'localhost:1522/FREEPDB1',
-        #'USER': 'system',
-        #'PASSWORD': 'Ora123456789',
-    #}
-#}
-
-'''
-Base de datos en Oracle Cloud (con Wallet)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'uiiehpbllexueqwv_high',  # nombre del servicio (según tnsnames.ora)
-        'USER': 'levelup',
-        'PASSWORD': 'App123456789',
-        'HOST': '',
-        'PORT': '',
-        'OPTIONS': {
-            'config_dir': r'C:\Wallet_UIIEHPBLLEXUEQWV',
-            'wallet_location': r'C:\Wallet_UIIEHPBLLEXUEQWV',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
-'''
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 REST_FRAMEWORK = {
@@ -142,6 +115,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
 
 
 # Password validation
@@ -192,8 +166,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-MEDIA_URL = '/media/'  # Ruta accesible desde la web
-MEDIA_ROOT = os.path.join(BASE_DIR,'media') 
+#MEDIA_URL = '/media/'  # Ruta accesible desde la web
+#MEDIA_ROOT = os.path.join(BASE_DIR,'media') 
 LOGIN_URL = '/login/'  # URL de la vista de login
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
